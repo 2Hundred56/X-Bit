@@ -16,7 +16,7 @@ class Pixel;
 class IntVector;
 class GraphicsManager {
 public:
-	GraphicsManager(int, int);
+	GraphicsManager();
 	virtual ~GraphicsManager();
 	void RenderTexture(Texture*, Vector, RenderData);
 	void RenderTexture(Texture*, Vector);
@@ -24,10 +24,10 @@ public:
 	bool InBounds(Vector);
 	bool InBounds(IntVector);
 	void AddPixel(IntVector, Pixel);
+	void Prepare(IntVector dimen);
 private:
 	std::vector<Pixel>** data;
-	int width;
-	int height;
+	int width, height;
 };
 
 #endif /* GRAPHICSMANAGER_H_ */

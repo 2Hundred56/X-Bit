@@ -12,13 +12,7 @@
 #include "IntVector.h"
 #include "RenderData.h"
 #include <algorithm>
-GraphicsManager::GraphicsManager(int w, int h) {
-	width=w;
-	height=h;
-	data = new std::vector<Pixel>*[width];
-	for (int i=0; i<width; i++) {
-		data[i]=new std::vector<Pixel>[height];
-	}
+GraphicsManager::GraphicsManager() {
 
 }
 
@@ -78,5 +72,14 @@ GraphicsManager::~GraphicsManager() {
 void GraphicsManager::AddPixel(IntVector intVector, Pixel pixel) {
 	if (InBounds(intVector)) {
 		data[intVector.x][intVector.y].push_back(pixel);
+	}
+}
+
+void GraphicsManager::Prepare(IntVector dimen) {
+	width=dimen.x;
+	height=dimen.y;
+	data = new std::vector<Pixel>*[width];
+	for (int i=0; i<width; i++) {
+		data[i]=new std::vector<Pixel>[height];
 	}
 }

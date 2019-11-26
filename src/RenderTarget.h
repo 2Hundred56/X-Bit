@@ -13,10 +13,10 @@ public:
 	virtual ~RenderTarget() {
 
 	}
-	virtual void Render(unsigned int* data, int w, int h) = 0;
+	virtual void Render(unsigned int* data, IntVector texture) = 0;
 	virtual void Flip() = 0;
 	virtual void BeginGraphics() = 0;
-	virtual void Initialize(IntVector iv) = 0;
+	virtual void Initialize(IntVector screen, IntVector texture) = 0;
 	virtual void CloseGraphics() = 0;
 };
 
