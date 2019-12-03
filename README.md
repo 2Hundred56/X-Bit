@@ -1,11 +1,9 @@
 # X-Bit
 
-Current Benchmark: SMB1 Mario in-air physics (freeze on landing)
-
+Current Benchmark: SMB1 Mario (blank texture) physics
 Requires:
-- Image loading
-- Brute-force broad phase
-- Sweep collision (narrow-phase)
-- Basic player logic for SMB1 Mario
-- Tiles
-- Animation logic?
+
+- Narrow-phase sweep collision
+- Broad-phase collision
+- Mario player logic
+- Game update loop
