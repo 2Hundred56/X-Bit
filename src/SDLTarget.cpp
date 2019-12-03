@@ -43,7 +43,7 @@ void SDLTarget::Initialize(IntVector screen, IntVector texture) {
 	if (screenTexture==NULL) throw(1.2);
 }
 
-SDLTarget::SDLTarget()  {
+SDLTarget::SDLTarget()  { // @suppress("Class members should be properly initialized")
 }
 
 SDLTarget::~SDLTarget() {

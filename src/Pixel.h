@@ -7,23 +7,30 @@
 
 #ifndef PIXEL_H_
 #define PIXEL_H_
-
+#include <utility>
+#include <iostream>
 class Pixel {
 public:
 	float r;
 	float g;
 	float b;
 	float a;
-	float z;
-	Pixel(float r, float g, float b, float a = 1, float z=0) : r(r), g(g), b(b), a(a), z(z){
+	Pixel(float r=0, float g=0, float b=0, float a = 1) : r(r), g(g), b(b), a(a){
 
 	}
-	Pixel() : r(0), g(0), b(0), a(0), z(-1000){
-
+	Pixel(const Pixel& p) {
+		r = p.r;
+		g = p.g;
+		b = p.b;
+		a = p.a;
 	}
 };
-Pixel& operator+= (Pixel&, Pixel);
-bool operator<(const Pixel&, const Pixel&);
+typedef std::pair<Pixel, float> ZPixel;
+bool operator <(const ZPixel &p1, const ZPixel &p2);
 
+Pixel& operator +=(Pixel &p1, Pixel p2);
 
+bool operator ==(Pixel p1, Pixel p2);
+
+std::ostream& operator<<(std::ostream&, Pixel);
 #endif /* PIXEL_H_ */

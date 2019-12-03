@@ -9,9 +9,13 @@
 #include "SDLTarget.h"
 #include "SDL2/SDL.h"
 #include "Rect.h"
+#include "ResourceManager.h"
 int main(int argc, char* args[]) {
 	CentralManager* manager = new CentralManager();
-	manager->camera=Rect(0, 0, 60, 60);
+	ResourceManager* rsrc = new ResourceManager();
+	//Tileset* set = rsrc->LoadTileset("convert/smb1-ground-tileset.xbit");
+	float i=60;
+	manager->camera=Rect(0, 0, i, i);
 	manager->target=new SDLTarget();
 	manager->Initialize();
 	SDL_Event e;
@@ -27,8 +31,8 @@ int main(int argc, char* args[]) {
 			if (e.type == SDL_MOUSEBUTTONDOWN){
 				quit = true;
 			}
-			manager->GameUpdate();
 		}
+		manager->GameUpdate();
 	}
 	manager->CloseGraphics();
 	return 0;

@@ -11,7 +11,9 @@
 #include "CollisionManager.h"
 #include "RenderTarget.h"
 #include "IntVector.h"
+#include "RenderData.h"
 #include "GraphicsManager.h"
+#include <iostream>
 void CentralManager::AddObject(GameObject *object) {
 	objects.insert(object);
 }
@@ -39,7 +41,7 @@ void CentralManager::GameUpdate() {
 }
 
 void CentralManager::BeginGraphics() {
-	target->Initialize(IntVector(576, 576), IntVector(camera.w, camera.h));
+	target->Initialize(IntVector(720, 720), IntVector(camera.w, camera.h));
 	target->BeginGraphics();
 }
 
@@ -60,4 +62,13 @@ void CentralManager::Initialize() {
 	physics = new PhysicsManager();
 	collision = new CollisionManager();
 	graphics = new GraphicsManager();
+}
+
+void CentralManager::RenderTexture(Texture* tex, Vector pos, RenderData data) {
+	IntVector draw = IntVector(pos-Vector(camera.x, camera.y));
+	graphics->RenderTexture(tex, draw, data);
+}
+
+void CentralManager::RenderTexture(Texture *tex, Vector pos) {
+	RenderTexture(tex, pos, RenderData());
 }

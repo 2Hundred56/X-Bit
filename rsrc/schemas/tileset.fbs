@@ -1,0 +1,25 @@
+namespace resources;
+
+file_extension ".xbit";
+file_identifier "TSET";
+
+struct Pixel {
+  r: float;
+  g: float;
+  b: float;
+  a: float;
+}
+
+table Tile {
+  data: [ushort];
+  width: ushort;
+  height: ushort;
+  id: ushort;
+}
+
+table Tileset {
+  tiles: [Tile];
+  palettes: [Pixel];
+}
+
+root_type Tileset;

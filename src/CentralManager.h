@@ -15,6 +15,8 @@ class PhysicsManager;
 class GraphicsManager;
 class CollisionManager;
 class RenderTarget;
+class Texture;
+class RenderData;
 class CentralManager {
 public:
 	CentralManager();
@@ -25,6 +27,8 @@ public:
 	void BeginGraphics();
 	void CloseGraphics();
 	void Initialize();
+	void RenderTexture(Texture* tex, Vector pos, RenderData data);
+	void RenderTexture(Texture* tex, Vector pos);
 //protected:
 	Rect camera;
 	std::set<GameObject*> objects;

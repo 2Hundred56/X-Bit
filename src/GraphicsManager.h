@@ -8,25 +8,24 @@
 #ifndef GRAPHICSMANAGER_H_
 #define GRAPHICSMANAGER_H_
 #include <vector>
+#include "Pixel.h"
 class Vector;
 class RenderData;
 class Texture;
 class RenderTarget;
-class Pixel;
 class IntVector;
 class GraphicsManager {
 public:
 	GraphicsManager();
 	virtual ~GraphicsManager();
-	void RenderTexture(Texture*, Vector, RenderData);
-	void RenderTexture(Texture*, Vector);
+	void RenderTexture(Texture*, IntVector, RenderData, float z = 0);
+	void RenderTexture(Texture*, IntVector, float z = 0);
 	unsigned int* Process();
-	bool InBounds(Vector);
 	bool InBounds(IntVector);
-	void AddPixel(IntVector, Pixel);
+	void AddPixel(IntVector, Pixel, float);
 	void Prepare(IntVector dimen);
 private:
-	std::vector<Pixel>** data;
+	std::vector<ZPixel>** data;
 	int width, height;
 };
 

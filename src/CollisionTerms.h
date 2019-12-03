@@ -64,16 +64,5 @@ public:
 	CollisionResult(CollisionHandle* other, Vector normal, float toi, float point) : other(other), normal(normal), toi(toi), point(point), collision(true){
 	}
 };
-class CollisionLayer {
-public:
-	virtual ~CollisionLayer() {
-
-	}
-	virtual std::vector<CollisionHandle*> Check(CollisionHandle* handle, Vector sweep) = 0;
-};
-class BroadPhase : public CollisionLayer {
-public:
-	virtual void Insert(CollisionHandle* handle);
-};
 
 #endif /* COLLISIONTERMS_H_ */
