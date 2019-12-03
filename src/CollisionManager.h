@@ -15,7 +15,7 @@ public:
 	virtual ~CollisionManager();
 	std::vector<CollisionResult> CheckCollisionsStatic(CollisionHandle* handle);
 	CollisionResult CheckCollisionsSweep(CollisionHandle* handle, Vector sweep);
-	CollisionResult CheckCollision(CollisionHandle* h1, CollisionHandle* h2);
+	CollisionResult CheckCollision(CollisionHandle* h1, CollisionHandle* h2, Vector velocity);
 };
 
 #endif /* COLLISIONMANAGER_H_ */

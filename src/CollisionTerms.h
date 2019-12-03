@@ -21,6 +21,7 @@ public:
 
 	}
 };
+Projection operator +(Projection p1, Projection p2);
 class Shape {
 public:
 	virtual ~Shape() {

@@ -9,7 +9,10 @@
 #include "SDLTarget.h"
 #include "SDL2/SDL.h"
 #include "Rect.h"
+#include "CollisionManager.h"
+#include "TestHandle.h"
 #include "ResourceManager.h"
+#include <iostream>
 int main(int argc, char* args[]) {
 	CentralManager* manager = new CentralManager();
 	ResourceManager* rsrc = new ResourceManager();
@@ -18,6 +21,14 @@ int main(int argc, char* args[]) {
 	manager->camera=Rect(0, 0, i, i);
 	manager->target=new SDLTarget();
 	manager->Initialize();
+	TestHandle* t1 = new TestHandle(Vector(-1, -4), new AABB(1, 1));
+	TestHandle* t2 = new TestHandle(Vector(0, 0), new AABB(2, 2));
+	CollisionResult r = manager->collision->CheckCollision(t1, t2, Vector(1, 1));
+	if (r.collision) {
+		std::cout<<r.normal<<"\n"<<std::flush;
+		std::cout<<r.toi<<"\n"<<std::flush;
+		std::cout<<r.point<<"\n"<<std::flush;
+	}
 	SDL_Event e;
 	bool quit = false;
 	while (!quit){
