@@ -8,6 +8,7 @@
 #ifndef VECTOR_H_
 #define VECTOR_H_
 #include <iostream>
+#include <cmath>
 class Vector {
 public:
 	float x, y;
@@ -19,6 +20,9 @@ public:
 	}
 	Vector () : x(0), y(0) {
 
+	}
+	float Magnitude() {
+		return std::sqrt(x*x+y*y);
 	}
 };
 
@@ -39,5 +43,7 @@ Vector operator- (Vector, Vector);
 Vector operator+ (Vector, Vector);
 
 std::ostream& operator<<(std::ostream&, Vector);
+
+Vector normalize(Vector v);
 
 #endif /* VECTOR_H_ */

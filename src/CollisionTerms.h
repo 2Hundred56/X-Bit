@@ -31,6 +31,15 @@ public:
 	virtual Projection Proj(Vector axis) = 0;
 	virtual Rect ContainBox() = 0;
 };
+class LineSegment {
+public:
+	LineSegment (Vector point1, Vector point2);
+	virtual std::set<Vector> Axes (Shape*, Vector);
+	virtual Projection Proj(Vector axis);
+	virtual Rect ContainBox();
+protected:
+	Vector p1, p2, normal, along;
+};
 class AABB : public Shape {
 public:
 	AABB(float hw, float hh);

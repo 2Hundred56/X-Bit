@@ -46,4 +46,6 @@ Vector& operator +=(Vector& orig, Vector add) {
 	return orig;
 }
 
-
+Vector normalize(Vector v) {
+	return v / v.Magnitude();
+}
