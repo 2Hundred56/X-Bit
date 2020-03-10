@@ -11,7 +11,8 @@
 
 class BroadPhase : public CollisionLayer {
 public:
-	virtual void Insert(CollisionHandle* handle);
+	virtual void Insert(CollisionHandle* handle) = 0;
+	virtual void Remove(CollisionHandle* handle) = 0;
 };
 
 #endif /* BROADPHASE_H_ */

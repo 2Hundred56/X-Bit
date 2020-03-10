@@ -10,8 +10,7 @@
 #include "Time.h"
 #include <set>
 #include "Rect.h"
-class GameObject;
-class PhysicsManager;
+#include "GameObject.h"
 class GraphicsManager;
 class CollisionManager;
 class RenderTarget;
@@ -31,8 +30,7 @@ public:
 	void RenderTexture(Texture* tex, Vector pos);
 //protected:
 	Rect camera;
-	std::set<GameObject*> objects;
-	PhysicsManager* physics = 0;
+	std::set<GameObject*, go_compare> objects;
 	CollisionManager* collision = 0;
 	GraphicsManager* graphics = 0;
 	RenderTarget* target = 0;

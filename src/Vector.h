@@ -32,7 +32,11 @@ bool operator <(Vector v1, Vector v2);
 
 Vector operator *(Vector v, float f);
 
+Vector operator /(Vector v, float f);
+
 Vector& operator+= (Vector& orig, Vector add);
+
+Vector& operator*= (Vector& orig, float f);
 
 float projection(Vector v, Vector axis);
 

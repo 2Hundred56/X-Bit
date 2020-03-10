@@ -46,6 +46,15 @@ Vector& operator +=(Vector& orig, Vector add) {
 	return orig;
 }
 
+Vector& operator *=(Vector& orig, float f) {
+	orig = Vector(orig.x*f, orig.y*f);
+	return orig;
+}
+
+Vector operator /(Vector v, float f) {
+	return Vector(v.x/f, v.y/f);
+}
+
 Vector normalize(Vector v) {
 	return v / v.Magnitude();
 }

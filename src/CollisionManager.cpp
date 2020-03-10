@@ -6,7 +6,8 @@
  */
 
 #include "CollisionManager.h"
-
+#include "BroadPhase.h"
+#include <algorithm>
 CollisionManager::CollisionManager() {
 	// TODO Auto-generated constructor stub
 
@@ -16,7 +17,7 @@ CollisionManager::~CollisionManager() {
 	// TODO Auto-generated destructor stub
 }
 
-CollisionResult CollisionManager::CheckCollision(CollisionHandle *h1,
+CollisionResult CollisionManager::CheckCollisionSweep(CollisionHandle *h1,
 		CollisionHandle *h2, Vector velocity) {
 	//velocity is the velocity of h1 relative to h2
 	Shape* s1 = h1->GetShape();
@@ -65,4 +66,34 @@ CollisionResult CollisionManager::CheckCollision(CollisionHandle *h1,
 	}
 	if (!hasrun) return CollisionResult();
 	return CollisionResult(h2, -lastAxis, minTOI, p);
+}
+
+std::vector<CollisionResult> CollisionManager::CheckCollisionsSweep(
+		CollisionHandle *h, Vector sweep) {
+	std::vector<CollisionResult> results = std::vector<CollisionResult>();
+	if (h->sortingFlag>=broadPhases.size()) {
+		return results;
+	}
+	std::vector<CollisionHandle*> checks = broadPhases[h->sortingFlag]->Check(h, sweep);
+	for (auto it=checks.begin(); it<checks.end(); it++) {
+		CollisionResult r = CheckCollisionSweep(h, (*it), sweep);
+		if (r.collision) results.push_back(r);
+	}
+	std::sort(results.begin(), results.end());
+	return results;
+
+}
+
+void CollisionManager::RegisterHandle(CollisionHandle *handle) {
+	if (handle->sortingFlag>=broadPhases.size()) {
+		return;
+	}
+	broadPhases[handle->sortingFlag]->Insert(handle);
+}
+
+void CollisionManager::RemoveHandle(CollisionHandle *handle) {
+	if (handle->sortingFlag>=broadPhases.size()) {
+			return;
+		}
+		broadPhases[handle->sortingFlag]->Remove(handle);
 }

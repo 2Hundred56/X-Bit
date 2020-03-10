@@ -7,7 +7,8 @@
 
 #ifndef GAMEOBJECT_H_
 #define GAMEOBJECT_H_
-
+#include "Vector.h"
+class CentralManager;
 class GameObject {
 public:
 	virtual ~GameObject() {
@@ -28,17 +29,23 @@ public:
 	virtual void LateUpdate() {
 
 	}
+	virtual void RegisterManager(CentralManager* m) {
+		manager=m;
+	}
+	Vector position;
 	int ID = 0;
 	int priority = 0;
 	bool deletionFlag = false;
+	CentralManager* manager;
 };
-bool go_compare (GameObject* a, GameObject* b) {
-	if (a->priority<b->priority) return true;
-	if ((a->priority==b->priority) && (a->ID<b->ID)) return true;
-	return false;
-}
-#include <type_traits>
-using gocmp = std::integral_constant<decltype(&go_compare), &go_compare>;
+struct go_compare {
+	bool operator() (GameObject* a, GameObject* b) {
+		if (a->priority<b->priority) return true;
+			if ((a->priority==b->priority) && (a->ID<b->ID)) return true;
+			return false;
+	}
+
+};
 
 
 

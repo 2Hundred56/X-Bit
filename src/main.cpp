@@ -10,20 +10,24 @@
 #include "SDL2/SDL.h"
 #include "Rect.h"
 #include "CollisionManager.h"
+#include "TestObject.h"
 #include "TestHandle.h"
 #include "ResourceManager.h"
+#include "SMB1/Mario.h"
 #include <iostream>
 int main(int argc, char* args[]) {
 	CentralManager* manager = new CentralManager();
 	ResourceManager* rsrc = new ResourceManager();
 	//Tileset* set = rsrc->LoadTileset("convert/smb1-ground-tileset.xbit");
-	float i=60;
+	float i=600;
 	manager->camera=Rect(0, 0, i, i);
 	manager->target=new SDLTarget();
 	manager->Initialize();
 	TestHandle* t1 = new TestHandle(Vector(-1, -4), new AABB(1, 1));
 	TestHandle* t2 = new TestHandle(Vector(0, 0), new AABB(2, 2));
-	CollisionResult r = manager->collision->CheckCollision(t1, t2, Vector(1, 1));
+	SMB1::Mario* to = new SMB1::Mario();
+	manager->AddObject(to);
+	CollisionResult r = manager->collision->CheckCollisionSweep(t1, t2, Vector(1, 1));
 	if (r.collision) {
 		std::cout<<r.normal<<"\n"<<std::flush;
 		std::cout<<r.toi<<"\n"<<std::flush;

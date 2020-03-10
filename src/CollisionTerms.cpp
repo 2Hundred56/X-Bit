@@ -5,11 +5,9 @@
  *      Author: triforce
  */
 #include "CollisionTerms.h"
+#include "GameObject.h"
 Projection operator +(Projection p1, Projection p2) {
 	return Projection(p1.min + p2.min, p1.max + p2.max);
-}
-Rect CollisionHandle::GetRect() {
-	return GetShape()->ContainBox()+GetPos();
 }
 Projection AABB::Proj(Vector axis) {
 	float a = projection(Vector(-hw, -hh), axis);
@@ -33,16 +31,10 @@ std::set<Vector> AABB::Axes(Shape*, Vector vector) {
 	return axes;
 }
 
-LineSegment::LineSegment(Vector point1, Vector point2) {
-	if (point2.x < point1.x) {
-		p1=point2;
-		p2=point1;
-	}
-	else {
-		p1=point1;
-		p2=point2;
-	}
-	along=normalize(p2-p1);
+LineSegment::LineSegment(Vector slope) {
+	p = slope / 2;
+	if (p.x<0) p=-p;
+	along=normalize(p * 2);
 	normal=Vector(along.y, -along.x);
 	if (normal.x<0) normal=-normal;
 }
@@ -52,11 +44,19 @@ std::set<Vector> LineSegment::Axes(Shape*, Vector vector) {
 }
 
 Projection LineSegment::Proj(Vector axis) {
-	float proj1=projection(p1, axis);
-	float proj2=projection(p2, axis);
+	float proj1=projection(-p, axis);
+	float proj2=projection(p, axis);
 	return Projection(std::min(proj1, proj2), std::max(proj1, proj2));
 }
 
 Rect LineSegment::ContainBox() {
-	return Rect(p1.x, std::min(p1.y, p2.y), p2.x, std::max(p1.y, p2.y));
+	return Rect(-p.x, std::min(-p.y, p.y), p.x, std::max(-p.y, p.y));
+}
+
+Vector AttachedHandle::GetPos() {
+	return parent->position;
+}
+
+bool operator <(CollisionResult r1, CollisionResult r2) {
+	return r1.toi < r2.toi;
 }

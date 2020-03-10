@@ -18,5 +18,5 @@ Vector TestHandle::GetPos() {
 	return pos;
 }
 void TestHandle::CollisionCallback(CollisionResult collision) {
-	std::cout<<ID<<" reports collision at t="<<collision.toi<<". Normal: "<<collision.normal<<". Point: "<<collision.point<<"\n"<<std::flush;
+	std::cout<<"TEST reports collision at t="<<collision.toi<<". Normal: "<<collision.normal<<". Point: "<<collision.point<<"\n"<<std::flush;
 }

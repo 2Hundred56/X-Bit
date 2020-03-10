@@ -7,7 +7,6 @@
 
 #include "CentralManager.h"
 #include "GameObject.h"
-#include "PhysicsManager.h"
 #include "CollisionManager.h"
 #include "RenderTarget.h"
 #include "IntVector.h"
@@ -16,6 +15,7 @@
 #include <iostream>
 void CentralManager::AddObject(GameObject *object) {
 	objects.insert(object);
+	object->RegisterManager(this);
 }
 
 void CentralManager::GameUpdate() {
@@ -23,9 +23,8 @@ void CentralManager::GameUpdate() {
 		(*it)->InitialUpdate();
 	}
 	for (auto it = objects.begin(); it!=objects.end(); it++) {
-		(*it)->ResolveMovement();
-	}
-	physics->Update();
+			(*it)->ResolveMovement();
+		}
 	for (auto it = objects.begin(); it!=objects.end(); it++) {
 		(*it)->Update();
 	}
@@ -58,8 +57,7 @@ CentralManager::~CentralManager() {
 
 void CentralManager::Initialize() {
 	BeginGraphics();
-	objects=std::set<GameObject*>();
-	physics = new PhysicsManager();
+	objects=std::set<GameObject*, go_compare>();
 	collision = new CollisionManager();
 	graphics = new GraphicsManager();
 }
