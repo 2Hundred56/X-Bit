@@ -12,7 +12,7 @@
 
 class TestHandle : public CollisionHandle {
 public:
-	TestHandle(Vector p, Shape* s);
+	TestHandle(Vector p, Shape* s, int sf = 0, int tf = 1);
 	Shape* GetShape();
 	Vector GetPos();
 	void CollisionCallback(CollisionResult collision);

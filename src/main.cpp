@@ -19,14 +19,15 @@ int main(int argc, char* args[]) {
 	CentralManager* manager = new CentralManager();
 	ResourceManager* rsrc = new ResourceManager();
 	//Tileset* set = rsrc->LoadTileset("convert/smb1-ground-tileset.xbit");
-	float i=600;
+	float i=200;
 	manager->camera=Rect(0, 0, i, i);
 	manager->target=new SDLTarget();
 	manager->Initialize();
 	TestHandle* t1 = new TestHandle(Vector(-1, -4), new AABB(1, 1));
-	TestHandle* t2 = new TestHandle(Vector(0, 0), new AABB(2, 2));
+	TestHandle* t2 = new TestHandle(Vector(100, 200), new AABB(100, 32));
 	SMB1::Mario* to = new SMB1::Mario();
 	manager->AddObject(to);
+	manager->collision->RegisterHandle(t2);
 	CollisionResult r = manager->collision->CheckCollisionSweep(t1, t2, Vector(1, 1));
 	if (r.collision) {
 		std::cout<<r.normal<<"\n"<<std::flush;
@@ -40,12 +41,12 @@ int main(int argc, char* args[]) {
 			if (e.type == SDL_QUIT){
 				quit = true;
 			}
-			if (e.type == SDL_KEYDOWN){
+			/*if (e.type == SDL_KEYDOWN){
 				quit = true;
 			}
 			if (e.type == SDL_MOUSEBUTTONDOWN){
 				quit = true;
-			}
+			}*/
 		}
 		manager->GameUpdate();
 	}

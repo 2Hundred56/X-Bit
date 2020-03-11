@@ -39,7 +39,7 @@ public:
 	CentralManager* manager;
 };
 struct go_compare {
-	bool operator() (GameObject* a, GameObject* b) {
+	const bool operator() (GameObject* a, GameObject* b) {
 		if (a->priority<b->priority) return true;
 			if ((a->priority==b->priority) && (a->ID<b->ID)) return true;
 			return false;

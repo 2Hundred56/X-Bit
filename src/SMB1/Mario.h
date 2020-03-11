@@ -9,7 +9,7 @@ public:
 	}
 	bool IsRunning() {
 		InputState b = InputB();
-		return b==PRESSED || b==RELEASED;
+		return b==PRESSED || b==ON;
 	}
 	virtual float Friction() {
 		return 0.046875;

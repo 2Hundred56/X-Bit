@@ -22,10 +22,10 @@ public:
 	void RenderTexture(Texture*, IntVector, float z = 0);
 	unsigned int* Process();
 	bool InBounds(IntVector);
-	void AddPixel(IntVector, Pixel, float);
+	void AddPixel(IntVector, Pixel);
 	void Prepare(IntVector dimen);
 private:
-	std::vector<ZPixel>** data;
+	std::vector<Pixel>** data;
 	int width, height;
 };
 

@@ -7,9 +7,11 @@
 
 #include "CollisionManager.h"
 #include "BroadPhase.h"
+#include "BruteForce.h"
 #include <algorithm>
 CollisionManager::CollisionManager() {
 	// TODO Auto-generated constructor stub
+	broadPhases.push_back(new BruteForce());
 
 }
 
@@ -46,10 +48,15 @@ CollisionResult CollisionManager::CheckCollisionSweep(CollisionHandle *h1,
 			s = -1;
 		}
 		float v = projection(velocity, axis);
-		if (v==0) continue;
-		hasrun=true;
 		Projection proj1 = s1->Proj(axis)+Projection(projection(p1, axis),projection(p1, axis));
 		Projection proj2 = s2->Proj(axis)+Projection(projection(p2, axis),projection(p2, axis));
+		if (v==0) {
+			if ((proj1.max+proj2.max-proj1.min-proj2.min)>(std::max(proj1.max, proj2.max)-std::min(proj1.min, proj2.min))) continue;
+			else {
+				return CollisionResult();
+			}
+		}
+		hasrun=true;
 		firstTOI=(proj2.min-proj1.max)/v;
 		lastTOI=(proj2.max-proj1.min)/v;
 		if (lastTOI<maxTOI) {
@@ -58,13 +65,14 @@ CollisionResult CollisionManager::CheckCollisionSweep(CollisionHandle *h1,
 		if (firstTOI>minTOI) {
 			minTOI=firstTOI;
 			lastAxis = axis;
-			p = (proj1.max+v*firstTOI)*s;
+			p = (proj1.max+v*firstTOI);
 		}
 		if (maxTOI<0 || minTOI>1 || maxTOI<minTOI) {
 			return CollisionResult();
 		}
 	}
 	if (!hasrun) return CollisionResult();
+	//std::cout<<minTOI<<-lastAxis;
 	return CollisionResult(h2, -lastAxis, minTOI, p);
 }
 

@@ -26,13 +26,13 @@ void GraphicsManager::RenderTexture(Texture* texture, IntVector vector,
 		for (int j=0; j<texture->getHeight(); j++) {
 			pixel=texture->getPixel(IntVector(i, j));
 			finalLocation=Vector(i, j);
-			AddPixel(IntVector(finalLocation)+vector, pixel, z);
+			AddPixel(IntVector(finalLocation)+vector, pixel);
 		}
 	}
 }
 
 void GraphicsManager::RenderTexture(Texture* texture, IntVector vector, float z) {
-	RenderTexture(texture, vector, RenderData(), z);
+	RenderTexture(texture, vector, RenderData());
 }
 
 bool GraphicsManager::InBounds(IntVector vector) {
@@ -43,15 +43,15 @@ unsigned int* GraphicsManager::Process() {
 	unsigned int* processed = new unsigned int[width*height];
 	Pixel pixel;
 	Pixel p;
-	std::vector<ZPixel> pixels;
+	std::vector<Pixel> pixels;
 	for (int i=0; i<width; i++) {
 		for (int j=0; j<height; j++) {
 			pixel=Pixel(0,0,0,1);
 			pixels=data[i][j];
-			//TODO: Stare at this for 10 minutes
-			std::sort(pixels.begin(), pixels.end());
+			//TODO: Stare at this for another 10 minutes
+			//std::sort(pixels.begin(), pixels.end());
 			for (auto it=pixels.begin(); it!=pixels.end(); it++) {
-				pixel+=(*it).first;
+				pixel+=(*it);
 			}
 			processed[j*width+i]=(((int) (pixel.a*255))<<24)+(((int) (pixel.r*255))<<16)+(((int) (pixel.g*255))<<8)+(((int) (pixel.b*255)));
 
@@ -67,17 +67,17 @@ GraphicsManager::~GraphicsManager() {
 	delete data;
 }
 
-void GraphicsManager::AddPixel(IntVector intVector, Pixel pixel, float z) {
+void GraphicsManager::AddPixel(IntVector intVector, Pixel pixel) {
 	if (InBounds(intVector)) {
-		data[intVector.x][intVector.y].push_back(ZPixel(pixel, z));
+		data[intVector.x][intVector.y].push_back(pixel);
 	}
 }
 
 void GraphicsManager::Prepare(IntVector dimen) {
 	width=dimen.x;
 	height=dimen.y;
-	data = new std::vector<ZPixel>*[width];
+	data = new std::vector<Pixel>*[width];
 	for (int i=0; i<width; i++) {
-		data[i]=new std::vector<ZPixel>[height];
+		data[i]=new std::vector<Pixel>[height];
 	}
 }

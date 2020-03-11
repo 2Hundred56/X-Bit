@@ -19,12 +19,12 @@ enum PlayerState {
 class Texture;
 class Player: public GameObject {
 public:
-	float InputX() {return 1;}
-	float InputY() {return 1;}
-	InputState InputA() {return OFF;}
-	InputState InputB() {return OFF;}
-	InputState InputC() {return OFF;}
-	InputState InputD() {return OFF;}
+	float InputX() {return x;}
+	float InputY() {return y;}
+	InputState InputA() {return A;}
+	InputState InputB() {return B;}
+	InputState InputC() {return C;}
+	InputState InputD() {return D;}
 	virtual float Friction() = 0;
 	virtual float Accel() = 0;
 	virtual float Decel() = 0;
@@ -53,6 +53,10 @@ protected:
 	AttachedHandle* body;
 	PlayerState state;
 	Texture* texture;
+private:
+	InputState A = OFF, B = OFF, C = OFF, D = OFF;
+	float x = 0;
+	float y = 0;
 };
 
 #endif /* PLAYER_H_ */

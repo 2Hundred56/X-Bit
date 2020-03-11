@@ -40,7 +40,7 @@ void CentralManager::GameUpdate() {
 }
 
 void CentralManager::BeginGraphics() {
-	target->Initialize(IntVector(720, 720), IntVector(camera.w, camera.h));
+	target->Initialize(IntVector(300, 300), IntVector(camera.w, camera.h));
 	target->BeginGraphics();
 }
 

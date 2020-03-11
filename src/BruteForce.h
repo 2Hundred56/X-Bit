@@ -10,6 +10,7 @@
 
 #include "BroadPhase.h"
 class BruteForce : public BroadPhase {
+public:
 	BruteForce () {
 		handles = std::vector<CollisionHandle*>();
 	}
