@@ -8,7 +8,7 @@
 #ifndef BASICTEXTURE_H_
 #define BASICTEXTURE_H_
 #include "Texture.h"
-class IntVector;
+#include "IntVector.h"
 class Pixel;
 class BasicTexture: public Texture {
 public:
