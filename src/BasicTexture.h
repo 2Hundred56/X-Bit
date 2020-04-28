@@ -15,9 +15,10 @@ public:
 	BasicTexture(IntVector dimensions);
 	BasicTexture(IntVector dimensions, Pixel base);
 	virtual ~BasicTexture();
-	virtual Pixel getPixel(IntVector);
-	virtual IntVector getSize();
-	virtual Pixel setPixel(IntVector location, Pixel px);
+	virtual Pixel GetPixel(IntVector);
+	virtual IntVector GetSize();
+	virtual void SetPixel(IntVector location, Pixel px);
+	virtual void Blit(Texture* tex, IntVector origin);
 protected:
 	IntVector dimensions;
 	Pixel* data;

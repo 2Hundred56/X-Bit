@@ -14,8 +14,8 @@ public:
 	virtual ~Texture() {
 
 	}
-	virtual Pixel getPixel(IntVector) = 0;
-	virtual IntVector getSize() = 0;
+	virtual Pixel GetPixel(IntVector) = 0;
+	virtual IntVector GetSize() = 0;
 };
 
 #endif /* TEXTURE_H_ */

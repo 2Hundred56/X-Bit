@@ -13,7 +13,7 @@ class RenderTarget {
 	virtual IntVector DestinationSize() = 0;
 	virtual void Render(Texture* tex) = 0;
 	virtual void Flip() = 0;
-	virtual void BeginGraphics() = 0;
+	virtual void Ready() = 0;
 	virtual void Initialize(IntVector destSize) = 0;
 	virtual void End() = 0;
 };

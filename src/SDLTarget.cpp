@@ -20,7 +20,7 @@ void SDLTarget::Render(Texture *tex) {
 	unsigned int* data = new unsigned int[size.x*size.y];
 	for (int i=0; i<size.x; i++) {
 		for (int j=0; j<size.y; j++) {
-			pixel=scaled->getPixel(IntVector(i, j));
+			pixel=scaled->GetPixel(IntVector(i, j));
 			data[j*size.x+i]=(((int) (pixel.a*255))<<24)+(((int) (pixel.r*255))<<16)+(((int) (pixel.g*255))<<8)+(((int) (pixel.b*255)));
 		}
 	}
@@ -32,7 +32,7 @@ void SDLTarget::Flip() {
 	SDL_RenderCopy(renderer, screenTexture, NULL, NULL);
 	SDL_RenderPresent(renderer);
 }
-void SDLTarget::BeginGraphics() {
+void SDLTarget::Ready() {
 	if (!initialized) return;
 	SDL_DestroyTexture(screenTexture);
 	screenTexture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STATIC, size.x, size.y);

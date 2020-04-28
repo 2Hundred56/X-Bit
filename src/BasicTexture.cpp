@@ -8,6 +8,7 @@
 #include "BasicTexture.h"
 #include "IntVector.h"
 #include "Pixel.h"
+#include <cmath>
 BasicTexture::BasicTexture(IntVector size, Pixel base) : dimensions(size) {
 	data = new Pixel[dimensions.x*dimensions.y];
 	for (int i = 0; i < dimensions.x*dimensions.y; i++) data[i] = base;
@@ -17,7 +18,7 @@ BasicTexture::~BasicTexture() {
 	delete data;
 }
 
-Pixel BasicTexture::getPixel(IntVector location) {
+Pixel BasicTexture::GetPixel(IntVector location) {
 	return data[location.y*dimensions.y+location.x];
 }
 
@@ -25,10 +26,18 @@ BasicTexture::BasicTexture(IntVector dimensions) : BasicTexture(dimensions, Pixe
 
 }
 
-IntVector BasicTexture::getSize() {
+IntVector BasicTexture::GetSize() {
 	return dimensions;
 }
 
-Pixel BasicTexture::setPixel(IntVector location, Pixel px) {
+void BasicTexture::SetPixel(IntVector location, Pixel px) {
 	data[location.y*dimensions.y+location.x]=px;
+}
+
+void BasicTexture::Blit(Texture *tex, IntVector origin) {
+	for (int i=0; i<std::min(tex->GetSize().x, dimensions.x-origin.x); i++) {
+		for (int j=0; j<std::min(tex->GetSize().y, dimensions.y-origin.y); j++) {
+			data[(j+origin.y)*dimensions.y+(i+origin.x)]+=tex->GetPixel(IntVector(i, j));
+		}
+	}
 }

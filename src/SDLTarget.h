@@ -18,7 +18,7 @@ class SDLTarget: public RenderTarget {
 	virtual IntVector DestinationSize();
 	virtual void Render(Texture* tex);
 	virtual void Flip();
-	virtual void BeginGraphics();
+	virtual void Ready();
 	virtual void Initialize(IntVector destSize);
 	virtual void End();
 protected:
