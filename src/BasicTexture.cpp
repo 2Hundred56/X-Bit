@@ -8,8 +8,7 @@
 #include "BasicTexture.h"
 #include "IntVector.h"
 #include "Pixel.h"
-BasicTexture::BasicTexture(IntVector dimensions, Pixel base) {
-	this->dimensions=dimensions;
+BasicTexture::BasicTexture(IntVector size, Pixel base) : dimensions(size) {
 	data = new Pixel[dimensions.x*dimensions.y];
 	for (int i = 0; i < dimensions.x*dimensions.y; i++) data[i] = base;
 }

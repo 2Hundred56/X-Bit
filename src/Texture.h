@@ -15,7 +15,7 @@ public:
 
 	}
 	virtual Pixel getPixel(IntVector) = 0;
-	virtual IntVector getSize();
+	virtual IntVector getSize() = 0;
 };
 
 #endif /* TEXTURE_H_ */
