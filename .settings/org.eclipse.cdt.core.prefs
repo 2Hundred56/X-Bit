@@ -1,4 +1,9 @@
 eclipse.preferences.version=1
+environment/project/cdt.managedbuild.config.gnu.macosx.exe.debug.974310185.1911607357/PATH/delimiter=\:
+environment/project/cdt.managedbuild.config.gnu.macosx.exe.debug.974310185.1911607357/PATH/operation=replace
+environment/project/cdt.managedbuild.config.gnu.macosx.exe.debug.974310185.1911607357/PATH/value=/usr/local/bin/\:/usr/bin\:/bin\:/usr/sbin\:/sbin
+environment/project/cdt.managedbuild.config.gnu.macosx.exe.debug.974310185.1911607357/append=true
+environment/project/cdt.managedbuild.config.gnu.macosx.exe.debug.974310185.1911607357/appendContributed=true
 environment/project/cdt.managedbuild.config.gnu.macosx.exe.debug.974310185/PATH/delimiter=\:
 environment/project/cdt.managedbuild.config.gnu.macosx.exe.debug.974310185/PATH/operation=replace
 environment/project/cdt.managedbuild.config.gnu.macosx.exe.debug.974310185/PATH/value=/usr/local/bin/\:/usr/bin\:/bin\:/usr/sbin\:/sbin
