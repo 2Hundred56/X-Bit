@@ -13,6 +13,7 @@ struct SDL_Window;
 #include "RenderTarget.h"
 #include "IntVector.h"
 class SDLTarget: public RenderTarget {
+public:
 	virtual ~SDLTarget();
 	SDLTarget();
 	virtual IntVector DestinationSize();

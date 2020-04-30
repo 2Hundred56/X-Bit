@@ -15,8 +15,10 @@ class BasicTexture;
 class Camera {
 public:
 	Camera(CentralManager* m, Rect area);
+	virtual ~Camera();
 	void Ready();
 	void Snap();
+	void SetTarget(RenderTarget*);
 	BasicTexture* CurrentTexture();
 	Rect GetCaptureArea();
 protected:
@@ -24,7 +26,7 @@ protected:
 	Rect area;
 	CentralManager* manager;
 	BasicTexture* texture;
-	std::vector<RenderTarget*> renderTargets;
+	RenderTarget* renderTarget = 0;
 };
 
 #endif /* CAMERA_H_ */

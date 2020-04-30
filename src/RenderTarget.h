@@ -10,6 +10,7 @@
 class IntVector;
 class Texture;
 class RenderTarget {
+public:
 	virtual IntVector DestinationSize() = 0;
 	virtual void Render(Texture* tex) = 0;
 	virtual void Flip() = 0;

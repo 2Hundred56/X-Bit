@@ -36,3 +36,8 @@ IntVector operator *(IntVector iv, float c) {
 IntVector operator /(IntVector iv, float c) {
 	return IntVector(iv.x/c, iv.y/c);
 }
+
+std::ostream& operator <<(std::ostream& out, IntVector v) {
+	out<<"["<<v.x<<","<<v.y<<"]";
+	return out;
+}

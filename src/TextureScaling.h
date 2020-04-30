@@ -9,8 +9,6 @@
 #define TEXTURESCALING_H_
 class Texture;
 class IntVector;
-
-Texture* WindowScaling(Texture* base, IntVector targetSize);
-
-
+Texture* WindowScaling(Texture *base, IntVector targetSize);
+Texture* Scale(Texture* base, IntVector targetSize);
 #endif /* TEXTURESCALING_H_ */

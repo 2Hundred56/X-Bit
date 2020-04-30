@@ -9,8 +9,10 @@
 #include "IntVector.h"
 #include "Pixel.h"
 #include <cmath>
+#include "Timer.h"
 BasicTexture::BasicTexture(IntVector size, Pixel base) : dimensions(size) {
 	data = new Pixel[dimensions.x*dimensions.y];
+	Timer* t = new Timer();
 	for (int i = 0; i < dimensions.x*dimensions.y; i++) data[i] = base;
 }
 
@@ -35,8 +37,10 @@ void BasicTexture::SetPixel(IntVector location, Pixel px) {
 }
 
 void BasicTexture::Blit(Texture *tex, IntVector origin) {
-	for (int i=0; i<std::min(tex->GetSize().x, dimensions.x-origin.x); i++) {
-		for (int j=0; j<std::min(tex->GetSize().y, dimensions.y-origin.y); j++) {
+	float iMax = std::min(tex->GetSize().x, dimensions.x-origin.x);
+	float jMax = std::min(tex->GetSize().y, dimensions.y-origin.y);
+	for (int i=0; i<iMax; i++) {
+		for (int j=0; j<jMax; j++) {
 			data[(j+origin.y)*dimensions.y+(i+origin.x)]+=tex->GetPixel(IntVector(i, j));
 		}
 	}

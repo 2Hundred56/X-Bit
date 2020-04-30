@@ -24,6 +24,7 @@ void SDLTarget::Render(Texture *tex) {
 			data[j*size.x+i]=(((int) (pixel.a*255))<<24)+(((int) (pixel.r*255))<<16)+(((int) (pixel.g*255))<<8)+(((int) (pixel.b*255)));
 		}
 	}
+
 	SDL_UpdateTexture(screenTexture, NULL, data, size.x * sizeof(unsigned int));
 }
 void SDLTarget::Flip() {
@@ -47,6 +48,7 @@ void SDLTarget::Initialize(IntVector destSize) {
 	if (renderer == NULL) throw(true);
 	screenTexture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STATIC, size.x, size.y);
 	if (screenTexture==NULL) throw(1.2);
+	initialized=true;
 }
 
 SDLTarget::SDLTarget() : size(IntVector(0,0)){
